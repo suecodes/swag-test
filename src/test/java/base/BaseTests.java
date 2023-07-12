@@ -17,6 +17,11 @@ public class BaseTests {
 
         driver.manage().window().maximize();
 
+        loadSwagLabsPage();
+    }
+
+    @BeforeMethod
+    public void loadSwagLabsPage(){
         driver.get("https://www.saucedemo.com/");
         loginPage = new LoginPage(driver);
     }
