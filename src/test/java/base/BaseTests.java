@@ -15,6 +15,8 @@ public class BaseTests {
         System.setProperty("webdriver.chrome.driver", "resources/chromedriver");
         driver = new ChromeDriver();
 
+        driver.manage().window().maximize();
+
         driver.get("https://www.saucedemo.com/");
         loginPage = new LoginPage(driver);
     }
@@ -23,5 +25,4 @@ public class BaseTests {
     public void tearDown(){
         driver.quit();
     }
-
 }

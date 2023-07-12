@@ -27,4 +27,11 @@ public class LoginPage {
         return new InventoryPage(driver);
     }
 
+    public InventoryPage login(String username, String password){
+        driver.findElement(inputUsername).sendKeys(username);
+        driver.findElement(inputPassword).sendKeys(password);
+        driver.findElement(loginButton).click();
+        return new InventoryPage(driver);
+    }
+
 }
