@@ -9,6 +9,7 @@ public class LoginPage {
     private By inputUsername = By.id("user-name");
     private By inputPassword = By.id("password");
     private By loginButton = By.id("login-button");
+    private By labelMessage = By.xpath("//*[@id='login_button_container']/div/form/div[3]/h3");
 
     public LoginPage(WebDriver driver){
         this.driver = driver;
@@ -27,11 +28,14 @@ public class LoginPage {
         return new InventoryPage(driver);
     }
 
+    public String getMessage(){
+        return driver.findElement(labelMessage).getText();
+    }
+
     public InventoryPage login(String username, String password){
         driver.findElement(inputUsername).sendKeys(username);
         driver.findElement(inputPassword).sendKeys(password);
         driver.findElement(loginButton).click();
         return new InventoryPage(driver);
     }
-
 }

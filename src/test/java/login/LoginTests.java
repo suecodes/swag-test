@@ -14,4 +14,12 @@ public class LoginTests extends BaseTests {
         InventoryPage inventoryPage = loginPage.clickLoginButton();
         assertEquals(inventoryPage.getInventoryPageTitle(), "Products", "Page title is incorrect");
     }
+
+    @Test
+    public void testUnsuccessfulLogin(){
+        loginPage.setUsername("fakeuser");
+        loginPage.setPassword("fakepassword");
+        InventoryPage inventoryPage = loginPage.clickLoginButton();
+        assertEquals(loginPage.getMessage(), "Epic sadface: Username and password do not match any user in this service", "Error message is incorrect");
+    }
 }
