@@ -26,6 +26,11 @@ public class BaseTests {
         loginPage = new LoginPage(driver);
     }
 
+    @AfterMethod
+    public void unloadSwagLabsPage(){
+
+    }
+
     @AfterClass
     public void tearDown(){
         driver.quit();
