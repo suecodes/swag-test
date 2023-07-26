@@ -2,10 +2,14 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class LoginPage {
+import java.time.Duration;
 
-    private WebDriver driver;
+public class LoginPage extends BasePage{
+
     private By inputUsername = By.id("user-name");
     private By inputPassword = By.id("password");
     private By loginButton = By.id("login-button");
@@ -13,7 +17,7 @@ public class LoginPage {
     private By pageHeader = By.className("login_logo");
 
     public LoginPage(WebDriver driver){
-        this.driver = driver;
+        super(driver);
     }
 
     public void setUsername(String username){
@@ -33,11 +37,11 @@ public class LoginPage {
         return driver.findElement(labelMessage).getText();
     }
 
-    public InventoryPage login(String username, String password){
-        driver.findElement(inputUsername).sendKeys(username);
+    public void login(String username, String password){
+        WebElement usernameField = waitUntilVisible(inputUsername);
+        usernameField.sendKeys(username);
         driver.findElement(inputPassword).sendKeys(password);
         driver.findElement(loginButton).click();
-        return new InventoryPage(driver);
     }
 
     public String getPageHeader(){

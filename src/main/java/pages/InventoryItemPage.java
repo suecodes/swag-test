@@ -3,13 +3,12 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class InventoryItemPage {
+public class InventoryItemPage extends BasePage {
 
-    private WebDriver driver;
     private By productName = By.className("inventory_details_name");
 
     public InventoryItemPage(WebDriver driver){
-        this.driver = driver;
+        super(driver);
     }
 
     public String getProductName(){
