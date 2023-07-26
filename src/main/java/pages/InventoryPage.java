@@ -7,6 +7,7 @@ public class InventoryPage extends BasePage{
 
     private By labelTitle = By.className("title");
     private By productItem = By.className("inventory_item_name");
+    private By inventoryItemPrice = By.className("inventory_item_price");
 
     public InventoryPage(WebDriver driver){
         super(driver);
@@ -19,5 +20,9 @@ public class InventoryPage extends BasePage{
     public InventoryItemPage clickProductItem(){
         driver.findElements(productItem).get(0).click();
         return new InventoryItemPage(driver);
+    }
+
+    public String getPriceOfBackpack(){
+        return driver.findElements(inventoryItemPrice).get(0).getText();
     }
 }

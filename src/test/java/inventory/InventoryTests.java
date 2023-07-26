@@ -19,4 +19,9 @@ public class InventoryTests extends BaseTests {
         assertEquals(inventoryItemPage.getProductName(), "Sauce Labs Backpack", "Product name is incorrect");
     }
 
+    @Test
+    public void testGetPriceOfBackpack(){
+        assertEquals(inventoryPage.getPriceOfBackpack(), "$29.99", "Price is incorrect");
+    }
+
 }
