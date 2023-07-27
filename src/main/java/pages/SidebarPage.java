@@ -13,6 +13,7 @@ public class SidebarPage extends BasePage {
     private By logoutLink = By.id("logout_sidebar_link");
     private By closeButton = By.id("react-burger-cross-btn");
     private By burgerMenuButton = By.id("react-burger-menu-btn");
+    private By resetLink = By.id("reset_sidebar_link");
 
     public SidebarPage(WebDriver driver){
         super(driver);
@@ -26,6 +27,11 @@ public class SidebarPage extends BasePage {
 
     public void clickLogoutLink()  {
         WebElement link = waitUntilVisible(logoutLink);
+        link.click();
+    }
+
+    public void clickResetAppStateLink(){
+        WebElement link = waitUntilVisible(resetLink);
         link.click();
     }
 

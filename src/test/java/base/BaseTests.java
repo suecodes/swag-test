@@ -38,6 +38,7 @@ public class BaseTests {
         //driver.get("https://www.saucedemo.com/");
 
         sidebarPage.clickBurgerMenuButton();
+        sidebarPage.clickResetAppStateLink();
         sidebarPage.clickLogoutLink();
     }
 

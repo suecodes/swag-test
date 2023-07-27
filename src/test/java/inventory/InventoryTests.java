@@ -27,6 +27,7 @@ public class InventoryTests extends BaseTests {
 
     @Test void testAddBackpackToCart(){
         inventoryPage.clickAddBackpackToCart();
+        assertEquals(inventoryPage.getRemoveBackpackToCartButtonText(), "Remove", "Button label incorrect");
         assertTrue(inventoryPage.isShoppingCartBadgeDisplayed(), "Product not added to cart");
         assertEquals(inventoryPage.getCountOfItemsInShoppingCart(), 1, "Count of items in cart is incorrect");
     }
