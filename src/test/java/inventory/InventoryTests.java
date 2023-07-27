@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import pages.InventoryItemPage;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class InventoryTests extends BaseTests {
 
@@ -22,6 +23,12 @@ public class InventoryTests extends BaseTests {
     @Test
     public void testGetPriceOfBackpack(){
         assertEquals(inventoryPage.getPriceOfBackpack(), "$29.99", "Price is incorrect");
+    }
+
+    @Test void testAddBackpackToCart(){
+        inventoryPage.clickAddBackpackToCart();
+        assertTrue(inventoryPage.isShoppingCartBadgeDisplayed(), "Product not added to cart");
+        assertEquals(inventoryPage.getCountOfItemsInShoppingCart(), 1, "Count of items in cart is incorrect");
     }
 
 }

@@ -8,6 +8,9 @@ public class InventoryPage extends BasePage{
     private By labelTitle = By.className("title");
     private By productItem = By.className("inventory_item_name");
     private By inventoryItemPrice = By.className("inventory_item_price");
+    private By addBackpackToCartButton = By.id("add-to-cart-sauce-labs-backpack");
+    private By addBikeLightToCartButton = By.id("add-to-cart-sauce-labs-bike-light");
+    private By shoppingCartBadge = By.className("shopping_cart_badge");
 
     public InventoryPage(WebDriver driver){
         super(driver);
@@ -24,5 +27,21 @@ public class InventoryPage extends BasePage{
 
     public String getPriceOfBackpack(){
         return driver.findElements(inventoryItemPrice).get(0).getText();
+    }
+
+    public void clickAddBackpackToCart(){
+        driver.findElement(addBackpackToCartButton).click();
+    }
+
+    public void clickAddBikeLightToCart(){
+
+    }
+
+    public boolean isShoppingCartBadgeDisplayed(){
+        return driver.findElement(shoppingCartBadge).isDisplayed();
+    }
+
+    public int getCountOfItemsInShoppingCart(){
+        return Integer.parseInt(driver.findElement(shoppingCartBadge).getText());
     }
 }
