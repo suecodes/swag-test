@@ -11,7 +11,10 @@ public class InventoryPage extends BasePage{
     private By addBackpackToCartButton = By.id("add-to-cart-sauce-labs-backpack");
     private By removeBackpackFromCartButton = By.id("remove-sauce-labs-backpack");
     private By addBikeLightToCartButton = By.id("add-to-cart-sauce-labs-bike-light");
+    private By removeBikeLightFromCartButton = By.id("remove-sauce-labs-bike-light");
     private By shoppingCartBadge = By.className("shopping_cart_badge");
+
+
 
     public InventoryPage(WebDriver driver){
         super(driver);
@@ -30,20 +33,24 @@ public class InventoryPage extends BasePage{
         return driver.findElements(inventoryItemPrice).get(0).getText();
     }
 
-    public String getRemoveBackpackToCartButtonText(){
-        return driver.findElement(removeBackpackFromCartButton).getText();
-    }
-
     public void clickAddBackpackToCart(){
         driver.findElement(addBackpackToCartButton).click();
     }
 
-    public int getCountOfItemsInShoppingCart(){
-        return Integer.parseInt(driver.findElement(shoppingCartBadge).getText());
+    public String getRemoveBackpackFromCartButtonText(){
+        return driver.findElement(removeBackpackFromCartButton).getText();
     }
 
     public void clickAddBikeLightToCart(){
+        driver.findElement(addBikeLightToCartButton).click();
+    }
 
+    public String getRemoveBikeLightFromCartButtonText(){
+        return driver.findElement(removeBikeLightFromCartButton).getText();
+    }
+
+    public int getCountOfItemsInShoppingCart(){
+        return Integer.parseInt(driver.findElement(shoppingCartBadge).getText());
     }
 
     public boolean isShoppingCartBadgeDisplayed(){

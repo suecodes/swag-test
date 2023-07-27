@@ -25,11 +25,22 @@ public class InventoryTests extends BaseTests {
         assertEquals(inventoryPage.getPriceOfBackpack(), "$29.99", "Price is incorrect");
     }
 
-    @Test void testAddBackpackToCart(){
+    @Test
+    public void testAddBackpackToCart(){
         inventoryPage.clickAddBackpackToCart();
-        assertEquals(inventoryPage.getRemoveBackpackToCartButtonText(), "Remove", "Button label incorrect");
+        assertEquals(inventoryPage.getRemoveBackpackFromCartButtonText(), "Remove", "Button label incorrect");
         assertTrue(inventoryPage.isShoppingCartBadgeDisplayed(), "Product not added to cart");
         assertEquals(inventoryPage.getCountOfItemsInShoppingCart(), 1, "Count of items in cart is incorrect");
+    }
+
+    @Test
+    public void testAddMultipleProductsToCart(){
+        inventoryPage.clickAddBikeLightToCart();
+        inventoryPage.clickAddBackpackToCart();
+        assertEquals(inventoryPage.getRemoveBackpackFromCartButtonText(), "Remove", "Button label incorrect");
+        assertEquals(inventoryPage.getRemoveBikeLightFromCartButtonText(), "Remove", "Button label incorrect");
+        assertTrue(inventoryPage.isShoppingCartBadgeDisplayed(), "Product not added to cart");
+        assertEquals(inventoryPage.getCountOfItemsInShoppingCart(), 2, "Count of items in cart is incorrect");
     }
 
 }
