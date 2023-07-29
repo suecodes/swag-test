@@ -1,13 +1,23 @@
 package inventory;
 
 import base.BaseTests;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 import pages.InventoryItemPage;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class InventoryTests extends BaseTests {
+
+    public enum SortOrder {
+        ASCENDING,
+        DESCENDING
+    }
 
     @Test
     public void testInventoryPageTitleShowsProduct(){
@@ -16,35 +26,29 @@ public class InventoryTests extends BaseTests {
 
     @Test
     public void testClickOnProductToViewProductItem(){
-        inventoryItemPage = inventoryPage.clickProductItem(1);
+        inventoryItemPage = inventoryPage.clickProductItem(0);
         assertEquals(inventoryItemPage.getProductName(), "Sauce Labs Backpack", "Product name is incorrect");
     }
 
     @Test
-    public void testGetAllProductNames() {
-        // TODO: verify all names are correct based on default (initial page load)
-        // 1. First check current sort order = Name (A to Z)
-        // 2. Then for each product in list - compare list with default list
-        // 3. Possibly store product names in an enum list?
+    public void testProductsAreListedInDefaultAtoZSortOrder() {
+        String sortValue = inventoryPage.getCurrentSortOrder();
+        assertEquals("Name (A to Z)", sortValue, "Default sort order is not A to Z");
 
-        System.out.println(inventoryPage.getCurrentSortOrder());
-
-        int size = inventoryPage.getCountOfProducts();
-        for (int i = 0; i < size; i++) {
-            System.out.println(inventoryPage.getProductName(i));
-        }
+        List<String> productNames = getProductNamesFromList(inventoryPage.getProductNamesList());
+        boolean isSorted = isListSortedAscending(productNames, SortOrder.ASCENDING);
+        assertTrue(isSorted, "Product names are not in A to Z sort order.");
     }
 
     @Test
-    public void testAllProductsSortedAtoZOrder() {
-        // TODO:
-        // 1. Sort by za
-        // 2. Extract the product names and store them in a List of Strings.
-        // 3. Create a copy of the list and sort it using the Collections.sort() method to have the correct A-Z order.
-        //4. Compare the original list with the sorted list to check if they match.
+    public void testAllProductsSortedZtoAOrder() {
+        inventoryPage.selectSortFilter("za");
+        String sortValue = inventoryPage.getCurrentSortOrder();
+        assertEquals("Name (Z to A)", sortValue, "Default sort order is not Z to A");
 
-        inventoryPage.selectSortFilter("az");
-        System.out.println(inventoryPage.getCurrentSortOrder());
+        List<String> productNames = getProductNamesFromList(inventoryPage.getProductNamesList());
+        boolean isSorted = isListSortedAscending(productNames, SortOrder.DESCENDING);
+        assertTrue(isSorted, "Product names are not in Z to A sort order.");
     }
 
     @Test
@@ -70,4 +74,22 @@ public class InventoryTests extends BaseTests {
         assertEquals(inventoryPage.getCountOfItemsInShoppingCart(), 2, "Count of items in cart is incorrect");
     }
 
+    private List<String> getProductNamesFromList(List<WebElement> productNamesList){
+        List<String> productNames = new ArrayList<>();
+
+        for (WebElement product : productNamesList) {
+            productNames.add(product.getText());
+        }
+        return productNames;
+    }
+
+    private boolean isListSortedAscending(List<String> list, SortOrder sortOrder){
+        List<String> sortedList = new ArrayList<>(list);
+        if (sortOrder.equals(SortOrder.ASCENDING)) {
+            Collections.sort(sortedList);
+        } else if (sortOrder.equals(SortOrder.DESCENDING)) {
+            sortedList.sort(Collections.reverseOrder());
+        }
+        return list.equals(sortedList);
+    }
 }

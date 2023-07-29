@@ -55,6 +55,10 @@ public class InventoryPage extends BasePage{
         return driver.findElement(activeSortOption).getText();
     }
 
+    public String getCurrentSortOrderValue(){
+        return driver.findElement(activeSortOption).getAttribute("value");
+    }
+
     public String getPriceOfBackpack(){
         return driver.findElements(inventoryItemPrice).get(0).getText();
     }
