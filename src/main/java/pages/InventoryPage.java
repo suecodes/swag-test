@@ -41,6 +41,10 @@ public class InventoryPage extends BasePage{
         return driver.findElements(productItem);
     }
 
+    public List<WebElement> getProductPricesList() {
+        return driver.findElements(inventoryItemPrice);
+    }
+
     public void selectSortFilter(String value){
         WebElement sort = driver.findElement(productSortFilter);
         Select select = new Select(sort);
