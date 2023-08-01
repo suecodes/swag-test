@@ -5,12 +5,11 @@ import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 import pages.InventoryItemPage;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import static org.testng.Assert.*;
 
 public class InventoryTests extends BaseTests {
 
@@ -100,6 +99,18 @@ public class InventoryTests extends BaseTests {
         assertTrue(inventoryPage.isShoppingCartBadgeDisplayed(), "Product not added to cart");
         assertEquals(inventoryPage.getCountOfItemsInShoppingCart(), 2, "Count of items in cart is incorrect");
     }
+
+    @Test
+    public void testAddAndRemoveBackpackFromCart(){
+        inventoryPage.clickAddBackpackToCart();
+        inventoryPage.clickRemoveBackpackFromCart();
+        assertEquals(inventoryPage.getAddBackpackToCartText(), "Add to cart", "Add Cart for Backpack label incorrect");
+        assertFalse(inventoryPage.isShoppingCartBadgeDisplayed(), "Product not removed from cart");
+    }
+
+
+
+
 
     private List<String> getProductNamesFromList(List<WebElement> productNamesList){
         List<String> productNames = new ArrayList<>();

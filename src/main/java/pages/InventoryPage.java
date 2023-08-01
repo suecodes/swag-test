@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class InventoryPage extends BasePage{
 
@@ -71,6 +72,14 @@ public class InventoryPage extends BasePage{
         driver.findElement(addBackpackToCartButton).click();
     }
 
+    public String getAddBackpackToCartText(){
+        return driver.findElement(addBackpackToCartButton).getText();
+    }
+
+    public void clickRemoveBackpackFromCart(){
+        driver.findElement(removeBackpackFromCartButton).click();
+    }
+
     public String getRemoveBackpackFromCartButtonText(){
         return driver.findElement(removeBackpackFromCartButton).getText();
     }
@@ -88,6 +97,11 @@ public class InventoryPage extends BasePage{
     }
 
     public boolean isShoppingCartBadgeDisplayed(){
-        return driver.findElement(shoppingCartBadge).isDisplayed();
+        try {
+            return driver.findElement(shoppingCartBadge).isDisplayed();
+        }
+        catch(org.openqa.selenium.NoSuchElementException e){
+            return false;
+        }
     }
 }
