@@ -104,4 +104,25 @@ public class InventoryPage extends BasePage{
             return false;
         }
     }
+
+    public String getProductNameById(int id){
+        WebElement element = driver.findElement(By.id("item_" + id + "_title_link"));
+        return element.findElement(By.className("inventory_item_name")).getText();
+    }
+
+    public String getProductPriceById(int id){
+        WebElement idElement = driver.findElement(By.id("item_" + id + "_title_link"));
+        WebElement idParentElement = idElement.findElement(By.xpath(".."));
+        WebElement superParentElement = idParentElement.findElement(By.xpath(".."));
+
+        return superParentElement.findElement(By.className("inventory_item_price")).getText();
+    }
+
+    public String getProductDescriptionById(int id){
+        WebElement idElement = driver.findElement(By.id("item_" + id + "_title_link"));
+        WebElement idParentElement = idElement.findElement(By.xpath(".."));
+
+        return idParentElement.findElement(By.className("inventory_item_desc")).getText();
+    }
+
 }

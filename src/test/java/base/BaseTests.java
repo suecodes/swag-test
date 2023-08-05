@@ -1,5 +1,6 @@
 package base;
 
+import model.Product;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
@@ -7,6 +8,10 @@ import pages.InventoryItemPage;
 import pages.InventoryPage;
 import pages.LoginPage;
 import pages.SidebarPage;
+import utils.CSVDataReader;
+
+import java.io.IOException;
+import java.util.List;
 
 public class BaseTests {
 
@@ -15,6 +20,7 @@ public class BaseTests {
     protected SidebarPage sidebarPage;
     protected InventoryPage inventoryPage;
     protected InventoryItemPage inventoryItemPage;
+    private List<Product> productsList;
 
     @BeforeClass
     public void setUp(){
@@ -34,7 +40,7 @@ public class BaseTests {
 
     @AfterMethod
     public void unloadSwagLabsPage(){
-        // return to logout page
+        // return to log out page
         //driver.get("https://www.saucedemo.com/");
 
         sidebarPage.clickBurgerMenuButton();
@@ -46,6 +52,16 @@ public class BaseTests {
     public void tearDown(){
         if (driver != null){
             driver.quit();
+        }
+    }
+
+    public void productsData() throws IOException {
+        productsList = CSVDataReader.readProductsFromCSV();
+
+        for (Product product : productsList){
+            System.out.println("Name: " + product.getName());
+            System.out.println("Price: " + product.getPrice());
+            System.out.println("Description: " + product.getDescription());
         }
     }
 }

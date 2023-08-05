@@ -1,10 +1,10 @@
 package inventory;
 
 import base.BaseTests;
+import model.Product;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 import pages.InventoryItemPage;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -21,6 +21,13 @@ public class InventoryTests extends BaseTests {
     public enum PriceSortOrder {
         LOWTOHIGH,
         HIGHTOLOW
+    }
+
+    @Test(dataProvider = "productData", dataProviderClass = utils.ProductDataProvider.class)
+    public void testInventoryPageContainsAllProducts(Product product){
+        assertEquals(inventoryPage.getProductNameById(product.getId()), product.getName(), "Product name by Id does not match expected product name");
+        assertEquals(inventoryPage.getProductPriceById(product.getId()), product.getPrice(), "Product price by Id does not match expected price");
+        assertEquals(inventoryPage.getProductDescriptionById(product.getId()), product.getDescription(), "Product description by Id does not match expected description");
     }
 
     @Test
@@ -107,10 +114,6 @@ public class InventoryTests extends BaseTests {
         assertEquals(inventoryPage.getAddBackpackToCartText(), "Add to cart", "Add Cart for Backpack label incorrect");
         assertFalse(inventoryPage.isShoppingCartBadgeDisplayed(), "Product not removed from cart");
     }
-
-
-
-
 
     private List<String> getProductNamesFromList(List<WebElement> productNamesList){
         List<String> productNames = new ArrayList<>();
