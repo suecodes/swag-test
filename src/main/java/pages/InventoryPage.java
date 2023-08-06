@@ -17,6 +17,8 @@ public class InventoryPage extends BasePage{
     private By removeBackpackFromCartButton = By.id("remove-sauce-labs-backpack");
     private By addBikeLightToCartButton = By.id("add-to-cart-sauce-labs-bike-light");
     private By removeBikeLightFromCartButton = By.id("remove-sauce-labs-bike-light");
+    private By addOnesieToCartButton = By.id("add-to-cart-sauce-labs-onesie");
+    private By removeOnesieFromCartButton = By.id("remove-sauce-labs-onesie");
     private By shoppingCartBadge = By.className("shopping_cart_badge");
     private By productSortFilter = By.className("product_sort_container");
     private By activeSortOption = By.className("active_option");
@@ -64,6 +66,7 @@ public class InventoryPage extends BasePage{
         return driver.findElement(activeSortOption).getAttribute("value");
     }
 
+    // Backpack
     public String getPriceOfBackpack(){
         return driver.findElements(inventoryItemPrice).get(0).getText();
     }
@@ -84,14 +87,41 @@ public class InventoryPage extends BasePage{
         return driver.findElement(removeBackpackFromCartButton).getText();
     }
 
+    // Bike light
     public void clickAddBikeLightToCart(){
         driver.findElement(addBikeLightToCartButton).click();
+    }
+
+    public String getAddBikeLightToCartText(){
+        return driver.findElement(addBikeLightToCartButton).getText();
+    }
+
+    public void clickRemoveBikeLightFromCart(){
+        driver.findElement(removeBikeLightFromCartButton).click();
     }
 
     public String getRemoveBikeLightFromCartButtonText(){
         return driver.findElement(removeBikeLightFromCartButton).getText();
     }
 
+    // Onesie
+    public void clickAddOnesieToCart(){
+        driver.findElement(addOnesieToCartButton).click();
+    }
+
+    public String getAddOnesieToCartText(){
+        return driver.findElement(addOnesieToCartButton).getText();
+    }
+
+    public void clickRemoveOnesieFromCart(){
+        driver.findElement(removeOnesieFromCartButton).click();
+    }
+
+    public String getRemoveOnesieFromCartText(){
+        return driver.findElement(removeOnesieFromCartButton).getText();
+    }
+
+    // Shopping cart
     public int getCountOfItemsInShoppingCart(){
         return Integer.parseInt(driver.findElement(shoppingCartBadge).getText());
     }
@@ -105,6 +135,7 @@ public class InventoryPage extends BasePage{
         }
     }
 
+    // Products - name, price, description
     public String getProductNameById(int id){
         WebElement element = driver.findElement(By.id("item_" + id + "_title_link"));
         return element.findElement(By.className("inventory_item_name")).getText();

@@ -115,6 +115,25 @@ public class InventoryTests extends BaseTests {
         assertFalse(inventoryPage.isShoppingCartBadgeDisplayed(), "Product not removed from cart");
     }
 
+    @Test
+    public void testAddAndRemoveMultipleProductsFromCart(){
+        // add 3 products to cart
+        inventoryPage.clickAddBikeLightToCart();
+        inventoryPage.clickAddBackpackToCart();
+        inventoryPage.clickAddOnesieToCart();
+        assertTrue(inventoryPage.isShoppingCartBadgeDisplayed(), "Product not added to cart");
+        assertEquals(inventoryPage.getCountOfItemsInShoppingCart(), 3, "Count of items in cart is incorrect");
+
+        // remove 2 products from cart
+        inventoryPage.clickRemoveBackpackFromCart();
+        inventoryPage.clickRemoveOnesieFromCart();
+        assertEquals(inventoryPage.getCountOfItemsInShoppingCart(), 1, "Count of items in cart is incorrect");
+
+        // remove final item from cart
+        inventoryPage.clickRemoveBikeLightFromCart();
+        assertFalse(inventoryPage.isShoppingCartBadgeDisplayed(), "Product not removed from cart");
+    }
+
     private List<String> getProductNamesFromList(List<WebElement> productNamesList){
         List<String> productNames = new ArrayList<>();
 
