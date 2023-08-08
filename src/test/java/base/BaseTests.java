@@ -8,6 +8,7 @@ import pages.InventoryItemPage;
 import pages.InventoryPage;
 import pages.LoginPage;
 import pages.SidebarPage;
+import pages.CartPage;
 import utils.CSVDataReader;
 
 import java.io.IOException;
@@ -20,6 +21,7 @@ public class BaseTests {
     protected SidebarPage sidebarPage;
     protected InventoryPage inventoryPage;
     protected InventoryItemPage inventoryItemPage;
+    protected CartPage cartPage;
     private List<Product> productsList;
 
     @BeforeClass

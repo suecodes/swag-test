@@ -22,6 +22,7 @@ public class InventoryPage extends BasePage{
     private By shoppingCartBadge = By.className("shopping_cart_badge");
     private By productSortFilter = By.className("product_sort_container");
     private By activeSortOption = By.className("active_option");
+    private By shoppingCartLink = By.className("shopping_cart_link");
 
     public InventoryPage(WebDriver driver){
         super(driver);
@@ -154,6 +155,11 @@ public class InventoryPage extends BasePage{
         WebElement idParentElement = idElement.findElement(By.xpath(".."));
 
         return idParentElement.findElement(By.className("inventory_item_desc")).getText();
+    }
+
+    public CartPage clickShoppingCartLink(){
+        driver.findElement(shoppingCartLink).click();
+        return new CartPage(driver);
     }
 
 }
