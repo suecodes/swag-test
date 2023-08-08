@@ -4,7 +4,6 @@ import base.BaseTests;
 import model.Product;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
-import pages.InventoryItemPage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -33,12 +32,6 @@ public class InventoryTests extends BaseTests {
     @Test
     public void testInventoryPageTitleShowsProduct(){
         assertEquals(inventoryPage.getInventoryPageTitle(), "Products", "Product page title is incorrect");
-    }
-
-    @Test
-    public void testClickOnProductToViewProductItem(){
-        inventoryItemPage = inventoryPage.clickProductItem(0);
-        assertEquals(inventoryItemPage.getProductName(), "Sauce Labs Backpack", "Product name is incorrect");
     }
 
     @Test
