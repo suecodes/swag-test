@@ -8,6 +8,11 @@ import static org.testng.Assert.assertTrue;
 
 public class CartTests extends BaseTests {
 
+    static final int BACKPACK = 4;
+    static final String BACKPACK_NAME = "Sauce Labs Backpack";
+    static final String BACKPACK_PRICE = "$29.99";
+    static final String BACKPACK_DESCRIPTION = "carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.";
+
     @Test
     public void testCartPageTitleShowsYourCart(){
         cartPage = inventoryPage.clickShoppingCartLink();
@@ -15,7 +20,7 @@ public class CartTests extends BaseTests {
     }
 
     @Test
-    public void testAddProductsToCartAndViewCartContainsCorrectCount(){
+    public void testAddProductsToCartAndVerifyCartContainsCorrectCount(){
         inventoryPage.clickAddBikeLightToCart();
         inventoryPage.clickAddBackpackToCart();
         cartPage = inventoryPage.clickShoppingCartLink();
@@ -32,8 +37,17 @@ public class CartTests extends BaseTests {
     }
 
     @Test
-    public void testCartPageShowsEmptyListOfItems(){
+    public void testCartPageShowsEmptyList(){
         cartPage = inventoryPage.clickShoppingCartLink();
         assertEquals(cartPage.getProductListCountInCart(), 0, "Product List on Carts page should be empty");
+    }
+
+    @Test
+    public void testAddBackpackToCartAndVerifyProductIsListedOnCartPage(){
+        inventoryPage.clickAddBackpackToCart();
+        cartPage = inventoryPage.clickShoppingCartLink();
+        assertEquals(cartPage.getProductNameById(BACKPACK), BACKPACK_NAME, "Product name by Id does not match expected product name");
+        assertEquals(cartPage.getProductPriceById(BACKPACK), BACKPACK_PRICE, "Product price by Id does not match expected product price");
+        assertEquals(cartPage.getProductDescriptionById(BACKPACK), BACKPACK_DESCRIPTION, "Product description by Id does not match expected product description");
     }
 }
