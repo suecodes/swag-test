@@ -19,6 +19,7 @@ public class BaseTests {
     protected InventoryItemPage inventoryItemPage;
     protected CartPage cartPage;
     protected CheckoutStepOnePage checkoutStepOnePage;
+    protected CheckoutStepTwoPage checkoutStepTwoPage;
     private List<Product> productsList;
 
     @BeforeClass

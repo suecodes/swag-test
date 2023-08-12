@@ -14,4 +14,16 @@ public class CheckoutStepOneTests extends BaseTests {
         checkoutStepOnePage = cartPage.clickCheckoutButton();
         assertEquals(checkoutStepOnePage.getCartPageTitle(), "Checkout: Your Information", "Checkout page title is incorrect");
     }
+
+    @Test
+    public void testAddBackpackAndCheckout(){
+        inventoryPage.clickAddBackpackToCart();
+        cartPage = inventoryPage.clickShoppingCartLink();
+        checkoutStepOnePage = cartPage.clickCheckoutButton();
+        checkoutStepOnePage.setInputFirstName("Fred");
+        checkoutStepOnePage.setInputLastName("Flintstone");
+        checkoutStepOnePage.setInputPostalCode("90210");
+        checkoutStepTwoPage = checkoutStepOnePage.clickContinue();
+        assertEquals(checkoutStepOnePage.getCartPageTitle(), "Checkout: Overview", "Checkout page title is incorrect");
+    }
 }

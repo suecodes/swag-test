@@ -69,5 +69,4 @@ public class CartPage extends BasePage{
         driver.findElement(checkoutButton).click();
         return new CheckoutStepOnePage(driver);
     }
-
 }
