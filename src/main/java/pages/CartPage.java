@@ -9,6 +9,8 @@ public class CartPage extends BasePage{
     private By labelTitle = By.className("title");
     private By shoppingCartBadge = By.className("shopping_cart_badge");
     private By cartItems = By.className("cart_item");
+    private By continueShoppingButton = By.id("continue-shopping");
+    private By checkoutButton = By.id("checkout");
 
     public CartPage(WebDriver driver){
         super(driver);
@@ -55,6 +57,17 @@ public class CartPage extends BasePage{
         WebElement idParentElement = idElement.findElement(By.xpath(".."));
 
         return idParentElement.findElement(By.className("inventory_item_desc")).getText();
+    }
+
+    // Return to inventory page
+    public void clickContinueShoppingButton(){
+        driver.findElement(continueShoppingButton).click();
+    }
+
+    // Checkout
+    public CheckoutStepOnePage clickCheckoutButton(){
+        driver.findElement(checkoutButton).click();
+        return new CheckoutStepOnePage(driver);
     }
 
 }

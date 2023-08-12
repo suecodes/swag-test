@@ -4,11 +4,7 @@ import model.Product;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
-import pages.InventoryItemPage;
-import pages.InventoryPage;
-import pages.LoginPage;
-import pages.SidebarPage;
-import pages.CartPage;
+import pages.*;
 import utils.CSVDataReader;
 
 import java.io.IOException;
@@ -22,6 +18,7 @@ public class BaseTests {
     protected InventoryPage inventoryPage;
     protected InventoryItemPage inventoryItemPage;
     protected CartPage cartPage;
+    protected CheckoutStepOnePage checkoutStepOnePage;
     private List<Product> productsList;
 
     @BeforeClass
