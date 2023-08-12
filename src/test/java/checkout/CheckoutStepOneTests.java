@@ -16,7 +16,7 @@ public class CheckoutStepOneTests extends BaseTests {
     }
 
     @Test
-    public void testAddBackpackAndCheckout(){
+    public void testAddBackpackAndCheckoutWithYourInformationFilled(){
         inventoryPage.clickAddBackpackToCart();
         cartPage = inventoryPage.clickShoppingCartLink();
         checkoutStepOnePage = cartPage.clickCheckoutButton();
@@ -26,4 +26,36 @@ public class CheckoutStepOneTests extends BaseTests {
         checkoutStepTwoPage = checkoutStepOnePage.clickContinue();
         assertEquals(checkoutStepOnePage.getCartPageTitle(), "Checkout: Overview", "Checkout page title is incorrect");
     }
+
+    // Below tests checks error message is shown
+    @Test
+    public void testAddBackpackAndCheckoutWithNoInformation(){
+        inventoryPage.clickAddBackpackToCart();
+        cartPage = inventoryPage.clickShoppingCartLink();
+        checkoutStepOnePage = cartPage.clickCheckoutButton();
+        checkoutStepTwoPage = checkoutStepOnePage.clickContinue();
+        assertEquals(checkoutStepOnePage.getErrorMessageText(), "Error: First Name is required", "Error message text is incorrect");
+    }
+
+    @Test
+    public void testAddBackpackAndCheckoutWithFirstNameOnly(){
+        inventoryPage.clickAddBackpackToCart();
+        cartPage = inventoryPage.clickShoppingCartLink();
+        checkoutStepOnePage = cartPage.clickCheckoutButton();
+        checkoutStepOnePage.setInputFirstName("Fred");
+        checkoutStepTwoPage = checkoutStepOnePage.clickContinue();
+        assertEquals(checkoutStepOnePage.getErrorMessageText(), "Error: Last Name is required", "Error message text is incorrect");
+    }
+
+    @Test
+    public void testAddBackpackAndCheckoutWithFirstNameAndLastNameOnly(){
+        inventoryPage.clickAddBackpackToCart();
+        cartPage = inventoryPage.clickShoppingCartLink();
+        checkoutStepOnePage = cartPage.clickCheckoutButton();
+        checkoutStepOnePage.setInputFirstName("Fred");
+        checkoutStepOnePage.setInputLastName("Flintstone");
+        checkoutStepTwoPage = checkoutStepOnePage.clickContinue();
+        assertEquals(checkoutStepOnePage.getErrorMessageText(), "Error: Postal Code is required", "Error message text is incorrect");
+    }
+
 }

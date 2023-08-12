@@ -11,6 +11,7 @@ public class CheckoutStepOnePage extends BasePage{
     private By inputPostalCode = By.id("postal-code");
     private By continueButton = By.id("continue");
     private By cancelButton = By.id("cancel");
+    private By errorMessage = By.xpath("//*[@id='checkout_info_container']/div/form/div[1]/div[4]/h3");
 
     public CheckoutStepOnePage(WebDriver driver){
         super(driver);
@@ -39,5 +40,9 @@ public class CheckoutStepOnePage extends BasePage{
 
     public void clickCancel(){
         driver.findElement(cancelButton).click();
+    }
+
+    public String getErrorMessageText(){
+        return driver.findElement(errorMessage).getText();
     }
 }
