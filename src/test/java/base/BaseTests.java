@@ -23,7 +23,7 @@ public class BaseTests {
     private List<Product> productsList;
 
     @BeforeClass
-    public void setUp(){
+    public void setUp() {
         System.setProperty("webdriver.chrome.driver", "resources/chromedriver");
         driver = new ChromeDriver();
         driver.get("https://www.saucedemo.com/");
@@ -31,7 +31,7 @@ public class BaseTests {
     }
 
     @BeforeMethod
-    public void loginSwagLabs(){
+    public void loginSwagLabs() {
         loginPage = new LoginPage(driver);
         loginPage.login("standard_user", "secret_sauce");
         inventoryPage = new InventoryPage(driver);
@@ -39,9 +39,9 @@ public class BaseTests {
     }
 
     @AfterMethod
-    public void unloadSwagLabsPage(){
+    public void unloadSwagLabsPage() {
         // return to log out page
-        //driver.get("https://www.saucedemo.com/");
+        // driver.get("https://www.saucedemo.com/");
 
         sidebarPage.clickBurgerMenuButton();
         sidebarPage.clickResetAppStateLink();
@@ -49,8 +49,8 @@ public class BaseTests {
     }
 
     @AfterClass
-    public void tearDown(){
-        if (driver != null){
+    public void tearDown() {
+        if (driver != null) {
             driver.quit();
         }
     }
@@ -58,7 +58,7 @@ public class BaseTests {
     public void productsData() throws IOException {
         productsList = CSVDataReader.readProductsFromCSV();
 
-        for (Product product : productsList){
+        for (Product product : productsList) {
             System.out.println("Name: " + product.getName());
             System.out.println("Price: " + product.getPrice());
             System.out.println("Description: " + product.getDescription());
